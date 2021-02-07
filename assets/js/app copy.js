@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Add class and the x marker for a
       link.className = "delete-item secondary-content";
       link.innerHTML = `
+                <span style = "margin-right:240px; color:#000">${task.date.toLocaleString()}</span>
                  <i class="fa fa-remove"></i>
                 &nbsp;
                 <a href="/edit.html?id=${
@@ -169,9 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // Add class and the x marker for a
         link.className = "delete-item secondary-content";
         link.innerHTML = `
+              <span style = "margin-right:240px; color:#000">${cursor.value.date.toLocaleString()}</span>
                  <i class="fa fa-remove"></i>
                 &nbsp;
-                <a href="/edit.html?id=${cursor.value.id}"><i class="fa fa-edit"></i> </a>
+                <a href="/edit.html?id=${
+                  cursor.value.id
+                }"><i class="fa fa-edit"></i> </a>
                 `;
         // Append link to li
         li.appendChild(link);
