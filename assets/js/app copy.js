@@ -91,10 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const displayFilter = function (tasks) {
     taskList.innerHTML = "";
-    tasks.forEach((task, index) => {
+    tasks.forEach((task) => {
       const li = document.createElement("li");
       //add Attribute for delete
-      li.setAttribute("data-task-id", index + 1);
+      li.setAttribute("data-task-id", task.id);
       // Adding a class
       li.className = "collection-item";
       // Create text node and append it
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                  <i class="fa fa-remove"></i>
                 &nbsp;
                 <a href="/edit.html?id=${
-                  index + 1
+                  task.id
                 }"><i class="fa fa-edit"></i> </a>
                 `;
       // Append link to li
@@ -117,6 +117,20 @@ document.addEventListener("DOMContentLoaded", () => {
       taskList.appendChild(li);
     });
   };
+
+  // Filter tasks function definition
+  function filterTasks() {
+    let keyword = filter.value.toLowerCase();
+
+    let filterTaskList = tasks.filter(
+      (task) =>
+        task.taskname.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+    );
+    displayFilter(filterTaskList);
+  }
+
+  //   Filter Task
+  filter.addEventListener("keyup", filterTasks);
 
   function sorting(e) {
     let sortedTask;
@@ -152,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (cursor) {
         let newTask = {
+          id: cursor.value.id,
           taskname: cursor.value.taskname,
           date: cursor.value.date,
         };
